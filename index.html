@@ -7,5 +7,39 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script>
+      function App() {
+        return React.createElement(
+          'header',
+          null,
+          React.createElement(Title, { fontSize: '3rem' })
+        );
+      }
+
+      function Title({ fontSize }) {
+        const [time, setTime] = React.useState(new Date().toLocaleTimeString());
+
+        React.useEffect(() => {
+          setTimeout(() => {
+            setTime(new Date().toLocaleTimeString());
+          }, 1_000);
+        });
+
+        return React.createElement(
+          'h1',
+          { style: { fontSize, color: 'blue' } },
+          `Hello World! It's ${time}`
+        );
+      }
+
+      const container = document.getElementById('root');
+      const root = ReactDOM.createRoot(container);
+
+      root.render(React.createElement(App));
+    </script>
   </body>
 </html>
